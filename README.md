@@ -59,6 +59,7 @@ web-waybeyond/
 ## 🌐 Hospedagem & Visualização
 
 O projeto está preparado para deploy contínuo como site estático no **Cloudflare Pages**:
+Link do site hospedado: https://web-way-beyond.vinicius-s-silva026.workers.dev/
 
 - **Framework preset:** `None` (HTML/CSS/JS estático)
 - **Build command:** *(vazio)*
