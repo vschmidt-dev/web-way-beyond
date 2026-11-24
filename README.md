@@ -33,7 +33,7 @@ O **Way Beyond** é uma landing page minimalista, responsiva e acessível focada
 ## 📁 Estrutura do Projeto
 
 ```text
-web-waybeyond-main/
+web-waybeyond/
 ├── assets/
 │   ├── images/
 │   │   ├── brand/
@@ -69,7 +69,7 @@ O projeto está preparado para deploy contínuo como site estático no **Cloudfl
 1. Clone ou descarregue este repositório:
 
 ```bash
-git clone [https://github.com/seu-usuario/web-waybeyond-main.git](https://github.com/seu-usuario/web-waybeyond-main.git)
+git clone [https://github.com/vschmidt-dev/web-way-beyond.git](https://github.com/vschmidt-dev/web-way-beyond.git)
 ```
 
 2. Aceda à pasta do projeto:
