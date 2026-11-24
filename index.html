@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Way Beyond - Explore o Mundo Além</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/brand/logo-way-beyond-transparent.png" sizes="32x32">
+
+    <!-- Fontes e Ícones -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <style>
+        /* Cabeçalho e Navegação */
+        #main-header {
+            background-color: #faf9f5;
+            transition: background-color 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        #main-header.scrolled {
+            background-color: rgba(250, 249, 245, 0.75) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .brand-name {
+            color: #1b262c;
+            letter-spacing: -0.3px;
+        }
+
+        .nav-link-anim {
+            position: relative;
+            color: #5a656b;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link-anim::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1.5px;
+            background-color: #1b262c;
+            transition: width 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .nav-link-anim:hover,
+        .nav-link-anim.active {
+            color: #1b262c !important;
+            font-weight: 500 !important;
+        }
+
+        .nav-link-anim:hover::after,
+        .nav-link-anim.active::after {
+            width: 100%;
+        }
+
+        .hamburger-line {
+            width: 18px;
+            height: 1.5px;
+            background-color: #1b262c;
+            display: block;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        /* Acessibilidade: Foco por teclado */
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible {
+            outline: 2px solid #1b262c !important;
+            outline-offset: 2px;
+        }
+
+        .underline-field:focus-visible {
+            outline: none !important;
+            border-bottom-color: #1b262c !important;
+            box-shadow: 0 1px 0 0 #1b262c !important;
+        }
+
+        /* Cartões */
+        .card {
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease !important;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08) !important;
+        }
+
+        /* Tema Escuro (Dark Mode) */
+        [data-bs-theme="dark"] body {
+            background-color: #121619 !important;
+            color: #ffffff !important;
+        }
+
+        [data-bs-theme="dark"] #main-header {
+            background-color: #1a2128 !important;
+            border-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        [data-bs-theme="dark"] #main-header.scrolled {
+            background-color: rgba(26, 33, 40, 0.88) !important;
+        }
+
+        [data-bs-theme="dark"] #logo-img {
+            filter: brightness(0) invert(1);
+        }
+
+        [data-bs-theme="dark"] .brand-name {
+            color: #ffffff !important;
+        }
+
+        [data-bs-theme="dark"] .hamburger-line {
+            background-color: #ffffff;
+        }
+
+        [data-bs-theme="dark"] a:focus-visible,
+        [data-bs-theme="dark"] button:focus-visible,
+        [data-bs-theme="dark"] input:focus-visible,
+        [data-bs-theme="dark"] textarea:focus-visible {
+            outline-color: #ffffff !important;
+        }
+
+        [data-bs-theme="dark"] .underline-field:focus-visible {
+            border-bottom-color: #ffffff !important;
+            box-shadow: 0 1px 0 0 #ffffff !important;
+        }
+
+        [data-bs-theme="dark"] .nav-link-anim {
+            color: #adb5bd !important;
+        }
+
+        [data-bs-theme="dark"] .nav-link-anim::after {
+            background-color: #ffffff !important;
+        }
+
+        [data-bs-theme="dark"] .nav-link-anim:hover,
+        [data-bs-theme="dark"] .nav-link-anim.active {
+            color: #ffffff !important;
+        }
+
+        [data-bs-theme="dark"] h1,
+        [data-bs-theme="dark"] h2,
+        [data-bs-theme="dark"] h3,
+        [data-bs-theme="dark"] h4,
+        [data-bs-theme="dark"] h5,
+        [data-bs-theme="dark"] h6,
+        [data-bs-theme="dark"] span:not(.badge),
+        [data-bs-theme="dark"] .display-4,
+        [data-bs-theme="dark"] .display-5 {
+            color: #ffffff !important;
+        }
+
+        [data-bs-theme="dark"] p,
+        [data-bs-theme="dark"] .text-muted,
+        [data-bs-theme="dark"] .fw-light {
+            color: #ced4da !important;
+        }
+
+        [data-bs-theme="dark"] section[style*="background-color: #f1efe9"],
+        [data-bs-theme="dark"] section[style*="background-color: #faf9f5"] {
+            background-color: #1e262c !important;
+        }
+
+        [data-bs-theme="dark"] a.btn[style*="background-color: #1b262c"],
+        [data-bs-theme="dark"] button[type="submit"][style*="background-color: #1b262c"],
+        [data-bs-theme="dark"] .btn-modal-acao {
+            background-color: #2c3640 !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        }
+
+        [data-bs-theme="dark"] a.btn[style*="background-color: #1b262c"]:hover,
+        [data-bs-theme="dark"] button[type="submit"][style*="background-color: #1b262c"]:hover,
+        [data-bs-theme="dark"] .btn-modal-acao:hover {
+            background-color: #384553 !important;
+        }
+
+        [data-bs-theme="dark"] .card {
+            background-color: #1e262c !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        [data-bs-theme="dark"] .card:hover {
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        [data-bs-theme="dark"] .card-body {
+            background-color: #1e262c !important;
+        }
+
+        [data-bs-theme="dark"] .card-title,
+        [data-bs-theme="dark"] .card-text,
+        [data-bs-theme="dark"] .btn-descobrir {
+            color: #ffffff !important;
+        }
+
+        [data-bs-theme="dark"] .form-control {
+            color: #ffffff !important;
+            border-color: rgba(255, 255, 255, 0.25) !important;
+        }
+
+        [data-bs-theme="dark"] .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5) !important;
+        }
+
+        [data-bs-theme="dark"] .form-label {
+            color: #ced4da !important;
+        }
+
+        [data-bs-theme="dark"] #theme-toggle-btn {
+            border-color: rgba(255, 255, 255, 0.2) !important;
+            color: #ffffff !important;
+            background-color: #1e262c !important;
+        }
+
+        [data-bs-theme="dark"] .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+    </style>
+</head>
+<body style="font-family: 'Plus Jakarta Sans', sans-serif; background-color: #faf9f5; color: #1b262c;">
+
+    <!-- Cabeçalho -->
+    <header id="main-header" class="sticky-top border-bottom py-3" style="border-color: rgba(0,0,0,0.06) !important;">
+        <div class="container">
+            <div class="d-flex flex-nowrap align-items-center justify-content-between">
+                <a href="index.html" class="d-flex align-items-center gap-2 text-decoration-none text-nowrap">
+                    <img src="assets/images/brand/logo-way-beyond-favicon.png" alt="Logotipo Way Beyond" id="logo-img" style="width: 28px; height: 28px; object-fit: contain;">
+                    <span class="fw-semibold fs-6 brand-name">Way Beyond</span>
+                </a>
+
+                <div class="d-flex align-items-center gap-3 gap-lg-4">
+                    <nav id="nav-menu" class="d-none d-lg-block" aria-label="Navegação principal">
+                        <ul class="d-flex align-items-center gap-4 mb-0 list-unstyled small">
+                            <li><a href="#inicio" id="link-inicio" class="nav-link-anim active text-decoration-none pb-1 text-nowrap">Início</a></li>
+                            <li><a href="#secao-destinos" id="link-destinos" class="nav-link-anim text-decoration-none pb-1 text-nowrap">Destinos</a></li>
+                            <li><a href="#contato-form" id="link-contato" class="nav-link-anim text-decoration-none pb-1 text-nowrap">Contato</a></li>
+                        </ul>
+                    </nav>
+
+                    <div class="d-flex align-items-center gap-2">
+                        <button type="button" class="btn rounded-circle p-0 d-flex align-items-center justify-content-center flex-shrink-0" id="theme-toggle-btn" aria-label="Alternar tema claro ou escuro" style="width: 34px; height: 34px; border: 1px solid rgba(0,0,0,0.12); color: #1b262c;">
+                            <span class="material-symbols-outlined" style="font-size: 16px;" aria-hidden="true">brightness_6</span>
+                        </button>
+
+                        <button type="button" class="btn border-0 d-lg-none d-flex flex-column justify-content-center align-items-center gap-1 p-0 shadow-none flex-shrink-0" id="hamburger-btn" data-bs-toggle="collapse" data-bs-target="#mobile-nav-collapse" aria-controls="mobile-nav-collapse" aria-expanded="false" aria-label="Abrir ou fechar menu de navegação" style="width: 34px; height: 34px;">
+                            <span class="hamburger-line"></span>
+                            <span class="hamburger-line"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu Mobile -->
+            <nav id="mobile-nav-collapse" class="collapse d-lg-none pt-3" aria-label="Navegação móvel">
+                <ul class="d-flex flex-column gap-2 mb-0 list-unstyled small">
+                    <li><a href="#inicio" class="nav-link-anim active text-decoration-none pb-1 d-inline-block">Início</a></li>
+                    <li><a href="#secao-destinos" class="nav-link-anim text-decoration-none pb-1 d-inline-block">Destinos</a></li>
+                    <li><a href="#contato-form" class="nav-link-anim text-decoration-none pb-1 d-inline-block">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="inicio">
+        <!-- Hero -->
+        <section class="py-5 my-3 my-lg-4">
+            <div class="container py-2">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-6">
+                        <span class="text-uppercase small fw-semibold d-block mb-3" style="font-size: 0.7rem; letter-spacing: 2px; color: #6c757d;">— VIAGENS COM PROPÓSITO</span>
+
+                        <h1 class="display-4 mb-3" style="color: #1b262c; letter-spacing: -1px; line-height: 1.15;">
+                            <span class="fw-bold d-block">Explore o Mundo</span>
+                            <span class="fw-light fst-italic">Além.</span>
+                        </h1>
+
+                        <p class="fw-light mb-4" style="color: #5a656b; font-size: 0.95rem; max-width: 430px; line-height: 1.6;">
+                            Roteiros desenhados para quem deseja viajar com calma, profundidade e um novo olhar.
+                        </p>
+
+                        <a href="#secao-destinos" id="btn-ver-destinos" class="btn text-white px-4 py-2 rounded-2 mb-4 mb-lg-5 fw-medium text-decoration-none" style="background-color: #1b262c; font-size: 0.85rem;">
+                            Ver Destinos <span class="ms-2" aria-hidden="true">&rarr;</span>
+                        </a>
+
+                        <div class="text-uppercase fw-medium mt-3 mt-lg-4" style="font-size: 0.65rem; letter-spacing: 2.5px; color: #6c757d;">
+                            ROLE PARA EXPLORAR
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 d-flex justify-content-center justify-content-lg-end">
+                        <div class="position-relative" style="width: 100%; max-width: 370px;">
+                            <div class="position-absolute rounded-circle" aria-hidden="true" style="width: 240px; height: 240px; background-color: #f0c4a8; top: -25px; left: -35px; z-index: 0;"></div>
+                            <div class="position-absolute" aria-hidden="true" style="width: 280px; height: 55px; background-color: #c6d8be; bottom: -25px; left: 50%; transform: translateX(-50%); clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%); z-index: 0;"></div>
+
+                            <div class="position-relative overflow-hidden" style="border-radius: 185px 185px 12px 12px; z-index: 1; height: 440px; box-shadow: 0 10px 25px rgba(240, 196, 168, 0.65);">
+                                <img src="assets/images/hero-cherry-blossom.jpg" alt="Cerejeiras em flor na primavera" class="w-100 h-100 object-fit-cover">
+                                <div class="position-absolute bottom-0 end-0 text-white p-3 text-end fw-light" style="font-size: 0.72rem; line-height: 1.3; text-shadow: 0 1px 4px rgba(0,0,0,0.75);">
+                                    35° 00' N<br>135° 46' E
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nossa Essência -->
+        <section class="py-5 border-top border-bottom" aria-labelledby="essencia-titulo" style="background-color: #f1efe9; border-color: rgba(0,0,0,0.06) !important;">
+            <div class="container py-2">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-3 d-flex align-items-center gap-3">
+                        <span class="h4 fw-light mb-0" style="color: #6c757d;">01</span>
+                        <span class="text-uppercase small fw-semibold" style="font-size: 0.7rem; letter-spacing: 1.5px; color: #6c757d;">NOSSA ESSÊNCIA</span>
+                    </div>
+                    <div class="col-lg-4">
+                        <h2 id="essencia-titulo" class="h5 fw-semibold mb-0" style="color: #1b262c;">Menos pressa.<br><span class="fw-light" style="color: #5a656b;">Mais presença.</span></h2>
+                    </div>
+                    <div class="col-lg-5 small fw-light" style="color: #5a656b; line-height: 1.6;">
+                        <p class="mb-2">Não acreditamos em apenas passar por um lugar. Criamos jornadas minimalistamente pensadas para abrir espaço para o inesperado e para conversas verdadeiras.</p>
+                        <p class="mb-0">Cada roteiro é um convite para ir além do óbvio, respeitando o seu próprio ritmo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Destinos em Destaque -->
+        <section class="py-5 my-3" id="secao-destinos" aria-labelledby="destinos-titulo" style="scroll-margin-top: 80px;">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+                    <div>
+                        <span class="text-uppercase small fw-semibold d-block mb-1" style="font-size: 0.7rem; letter-spacing: 2px; color: #6c757d;">UMA CURADORIA ESPECIAL</span>
+                        <h2 id="destinos-titulo" class="h4 fw-bold mb-0" style="color: #1b262c;">Destinos em <span class="fw-light fst-italic">destaque</span></h2>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="destinos-grid"></div>
+            </div>
+        </section>
+
+        <!-- Contato -->
+        <section class="py-5 border-top" id="contato-form" aria-labelledby="contato-titulo" style="background-color: #faf9f5; border-color: rgba(0,0,0,0.06) !important; scroll-margin-top: 80px;">
+            <div class="container py-4">
+                <div class="row g-5 align-items-start justify-content-between">
+                    <div class="col-lg-5">
+                        <span class="text-uppercase fw-semibold d-block mb-3" style="font-size: 0.7rem; letter-spacing: 2px; color: #6c757d;">VAMOS PLANEJAR JUNTOS</span>
+                        <h2 id="contato-titulo" class="display-5 fw-semibold mb-3" style="color: #1b262c; letter-spacing: -1px; line-height: 1.15;">
+                            Conte-nos um<br>pouco<br>sobre você.
+                        </h2>
+                        <p class="fw-light mb-0" style="color: #5a656b; font-size: 0.95rem; max-width: 340px; line-height: 1.6;">
+                            Preencha a ficha e nossa equipe entrará em contato para começar sua jornada.
+                        </p>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <form id="contact-form" novalidate>
+                            <div class="mb-4">
+                                <label for="nome" class="form-label text-uppercase fw-semibold mb-1" style="font-size: 0.68rem; letter-spacing: 1.5px; color: #5a656b;">NOME *</label>
+                                <input type="text" class="form-control underline-field bg-transparent border-0 border-bottom border-secondary-subtle rounded-0 px-0 shadow-none" id="nome" name="nome" placeholder="Como podemos chamar você?" autocomplete="name" maxlength="100" required style="color: #1b262c;">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="email" class="form-label text-uppercase fw-semibold mb-1" style="font-size: 0.68rem; letter-spacing: 1.5px; color: #5a656b;">E-MAIL *</label>
+                                <input type="email" class="form-control underline-field bg-transparent border-0 border-bottom border-secondary-subtle rounded-0 px-0 shadow-none" id="email" name="email" placeholder="voce@email.com" autocomplete="email" maxlength="120" required style="color: #1b262c;">
+                            </div>
+
+                            <div class="row g-4 mb-4">
+                                <div class="col-md-6">
+                                    <label for="whatsapp" class="form-label text-uppercase fw-semibold mb-1" style="font-size: 0.68rem; letter-spacing: 1.5px; color: #5a656b;">WHATSAPP</label>
+                                    <input type="tel" class="form-control underline-field bg-transparent border-0 border-bottom border-secondary-subtle rounded-0 px-0 shadow-none" id="whatsapp" name="whatsapp" placeholder="(51) 99999-9999" autocomplete="tel" maxlength="15" style="color: #1b262c;">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="destino" class="form-label text-uppercase fw-semibold mb-1" style="font-size: 0.68rem; letter-spacing: 1.5px; color: #5a656b;">DESTINO DE INTERESSE</label>
+                                    <input type="text" class="form-control underline-field bg-transparent border-0 border-bottom border-secondary-subtle rounded-0 px-0 shadow-none" id="destino" name="destino" placeholder="Ex: Kyoto, Japão" maxlength="100" style="color: #1b262c;">
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="mensagem" class="form-label text-uppercase fw-semibold mb-1" style="font-size: 0.68rem; letter-spacing: 1.5px; color: #5a656b;">MENSAGEM</label>
+                                <textarea class="form-control underline-field bg-transparent border-0 border-bottom border-secondary-subtle rounded-0 px-0 shadow-none" id="mensagem" name="mensagem" rows="2" placeholder="Conte-nos sobre os detalhes da sua viagem..." maxlength="600" style="color: #1b262c;"></textarea>
+                            </div>
+
+                            <div id="form-feedback" class="small mb-3" aria-live="polite"></div>
+
+                            <button type="submit" class="btn text-white w-100 py-3 rounded-0 fw-medium d-flex align-items-center justify-content-center gap-2 mt-2" style="background-color: #1b262c; font-size: 0.88rem;">
+                                Confirmar ficha <span aria-hidden="true">&rarr;</span>
+                            </button>
+
+                            <p class="text-center text-muted fw-light mt-3 mb-0" style="font-size: 0.72rem;">
+                                Ao confirmar, você autoriza o contato da equipe Way Beyond.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="py-4" style="background-color: #1b262c; color: #faf9f5;">
+        <div class="container">
+            <div class="row align-items-center justify-content-between g-4">
+                <div class="col-md-6">
+                    <a href="index.html" class="text-decoration-none">
+                        <span class="fw-semibold text-white fs-6">Way Beyond</span>
+                    </a>
+                    <p class="text-white-50 small fw-light mb-0 mt-1" style="font-size: 0.78rem;">O mundo visto com calma, alma e profundidade.</p>
+                </div>
+
+                <div class="col-md-6 d-flex justify-content-md-end gap-3">
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-white-50 text-decoration-none fs-6 px-1"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                    <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X" class="text-white-50 text-decoration-none fs-6 px-1"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+                    <a href="https://whatsapp.com" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="text-white-50 text-decoration-none fs-6 px-1"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+            <hr class="border-secondary my-3 opacity-25">
+
+            <div class="text-center text-white-50 fw-light small" style="font-size: 0.72rem;">
+                <p class="mb-0">&copy; 2026 Way Beyond. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Confirmação -->
+    <div class="modal fade" id="modalSucesso" tabindex="-1" aria-labelledby="modalSucessoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow-lg position-relative p-2" style="background-color: var(--bs-body-bg); color: var(--bs-body-color);">
+                <button type="button" class="btn-close position-absolute top-0 end-0 m-4 shadow-none" data-bs-dismiss="modal" aria-label="Fechar"></button>
+
+                <div class="modal-body text-center px-4 py-5">
+                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle border border-secondary border-opacity-50 mb-4" aria-hidden="true" style="width: 56px; height: 56px;">
+                        <span class="material-symbols-outlined" style="font-size: 24px;">check</span>
+                    </div>
+
+                    <div class="text-uppercase fw-semibold mb-3" style="font-size: 0.68rem; letter-spacing: 2px; color: #6c757d;">
+                        FICHA ENVIADA
+                    </div>
+
+                    <h3 id="modalSucessoLabel" class="h4 fw-semibold mb-2" style="letter-spacing: -0.5px;">
+                        Aguarde nossa equipe entrar em contato com você
+                    </h3>
+
+                    <div class="my-3" aria-hidden="true" style="font-size: 1.1rem;">
+                        ✈️ 🎫
+                    </div>
+
+                    <p id="modalMensagemTexto" class="text-muted fw-light small mb-4 px-lg-4" style="font-size: 0.88rem; line-height: 1.5;">
+                        Recebemos seus dados e em breve vamos conversar sobre a sua próxima jornada.
+                    </p>
+
+                    <div class="px-md-5">
+                        <button type="button" class="btn text-white w-100 py-3 rounded-2 fw-medium d-flex align-items-center justify-content-center gap-2 btn-modal-acao" data-bs-dismiss="modal" style="background-color: #1b262c; font-size: 0.88rem;">
+                            Entendi <span aria-hidden="true">&rarr;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Assistente VLibras -->
+    <div vw class="enabled" aria-hidden="true">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="assets/js/destinations-data.js" defer></script>
+    <script src="assets/js/main.js" defer></script>
+</body>
+</html>
